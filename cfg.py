@@ -1,7 +1,7 @@
 import os
 
-ver = '2.6'
-path = f'../../mask/SiN-{ver}'
+ver = '1.0'
+path = f'../../mask/SiN150-{ver}'
 work = f'{path}/layouts'
 if not os.path.isdir(path): os.mkdir(path)
 if not os.path.isdir(work): os.mkdir(work)
@@ -9,13 +9,13 @@ if not os.path.isdir(work): os.mkdir(work)
 draft = 'draft'
 
 dw = 0.1
-wg = 0.8 + dw
-eg = 40
-ch = 250
-sch = 100
-phase = 90
-radius = 150
-angle = 6
+wg = 2.0 + dw
+eg = 40.0
+ch = 250.0
+sch = 100.0
+phase = 90.0
+radius = 500.0
+angle = 6.0
 
 w1x2 = 5.6 + dw
 l1x2 = 18.3
@@ -23,18 +23,18 @@ s1x2 = 1.5
 w2x2 = 8.4 + dw
 l2x2 = 52.5
 s2x2 = 1.46
-w4x4 = 12 + dw
-l4x4 = 581
+w4x4 = 12.0 + dw
+l4x4 = 581.0
 s4x4 = 1.5
-lpbs = 56
+lpbs = 56.0
 wpbs = 1.85 + dw
-ltpr = 5
+ltpr = 5.0
 wtpr = 2.0 + dw
-ltip = 600
-lext = 500
+ltip = 600.0
+lext = 500.0
 wtip = 0.3
-lpad = 400
-wpad = 10
+lpad = 400.0
+wpad = 10.0
 ldci = 22.3
 sdci = 1.9
 
