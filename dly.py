@@ -10,15 +10,12 @@ import y2x2
 
 class delayline:
   def __init__(self):
-    # self.dx = 5610
-    self.dx = 4610
-    self.dy = 50
-    self.dr = 50
+    self.dx = 3010
+    self.dy = 1140
+    self.dr = 100
 
-    # self.rmax = 1350
-    # self.xinit = 7800
-    self.rmax = 2400
-    self.xinit = 6800
+    self.rmax = 2350
+    self.xinit = 6200
     self.length = 0
 
   def inner(self, x, y):
@@ -77,7 +74,7 @@ class delayline:
     return x5, y5
 
   def outport(self, x, y, dy):
-    cfg.radius = 150
+    cfg.radius = 500
     df = dev.euler(cfg.wg, cfg.radius, 90)
     x1, y1 = dev.tline(x, y, dy - y + df.dy)
     x2, y2 = dev.bends(x1, y1, 90, 270, 1, 1)
@@ -141,8 +138,9 @@ def dlmzi(x, y):
 
 def chips(x, y):
   radius = cfg.radius
-  dlmzi(x, y)
-  dline(x, y + cfg.sch * 31)
+  # dlmzi(x, y)
+  # dline(x, y + cfg.sch * 31)
+  dline(x, y)
   cfg.radius = radius
   return x, y
 
@@ -150,6 +148,7 @@ def chips(x, y):
 if __name__ == '__main__':
   filename = 'delay_line'
   chips(0, cfg.sch * 2)
-  dev.filled(0, 0, 1)
-  dev.saveas(filename)
-  dev.dlayers(filename, 'rect', 'edge')
+  dev.savedxf(filename)
+  # dev.filled(0, 0, 1)
+  # dev.saveas(filename)
+  # dev.dlayers(filename, 'rect', 'edge')
