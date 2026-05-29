@@ -70,5 +70,4 @@ def pbs(sign):
 if __name__ == '__main__':
   cfg.draft = 'mask'
   workspace = '../../ansys'
-  workspace = cfg.work
-  dc(workspace)
+  dc(f'{workspace}/dc')
