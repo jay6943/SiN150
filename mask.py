@@ -1,62 +1,51 @@
 import cfg
 import dev
 import key
-import pbs
 import tip
-import fgc
-import ohm
-import wgs
 import dly
-import y4x4
-import rx
+import voa
+import pbs
+import dci
 
 
-def icr(xpos, ypos):
+def delay_large(xpos, ypos):
   x, y = key.frame(xpos, ypos, 1)
-  x, y = dev.filled(x, y, 0)
-  rx.chips(x, y + cfg.size * 0.5)
+  x, y = dev.filled(x, y, 1)
+  _, y = voa.chip(x, y + cfg.sch * 6, 4000, cfg.size)
+  _, y = tip.chip(x, y + cfg.sch * 6, cfg.size)
+  _, y = dly.dline(x, y + cfg.sch, 5600, 1415, 100, 100, 3000)
 
 
-def pbses(xpos, ypos):
+def delay_small(xpos, ypos):
   x, y = key.frame(xpos, ypos, 1)
-  x, y = dev.filled(x, y, 0)
-  _, y = tip.chip(x, y + cfg.sch * 3, cfg.size)
+  x, y = dev.filled(x, y, 1)
+  _, y = voa.chip(x, y + cfg.sch * 6, 4000, cfg.size)
+  _, y = tip.chip(x, y + cfg.sch * 6, cfg.size)
+  _, y = dly.dline(x, y + cfg.sch, 6000, 3170, 100, 50, 1800)
+
+
+def polarization(xpos, ypos):
+  x, y = key.frame(xpos, ypos, 1)
+  x, y = dev.filled(x, y, 1)
+  _, y = voa.chip(x, y + cfg.sch * 6, 4000, cfg.size)
+  _, y = tip.chips(x, y + cfg.sch * 6)
   _, y = pbs.chips(x, y)
-  _, y = tip.chip(x, y, cfg.size)
+
+
+def directional(xpos, ypos):
+  x, y = key.frame(xpos, ypos, 1)
+  x, y = dev.filled(x, y, 1)
+  _, y = voa.chip(x, y + cfg.sch * 6, 4000, cfg.size)
+  _, y = tip.chips(x, y + cfg.sch * 6)
   _, y = pbs.chips(x, y)
-  _, y = tip.chip(x, y, cfg.size)
 
 
-def hybrids(xpos, ypos):
-  x, y = key.frame(xpos, ypos, 1)
-  x, y = dev.filled(x, y, 0)
-  _, y = tip.chips(x, y + cfg.sch)
-  _, y = y4x4.chips(x, y)
-
-
-def waveguides(xpos, ypos):
-  x, y = key.frame(xpos, ypos, 1)
-  x, y = dev.filled(x, y, 0)
-  _, y = tip.chip(x, y + cfg.sch * 2, cfg.size)
-  _, y = wgs.chips(x, y + cfg.sch)
-  _, y = tip.chip(x, y + cfg.sch * 4, cfg.size)
-  _, y = ohm.chips(x, y + cfg.sch)
-  _, y = tip.chip(x, y + cfg.sch, cfg.size)
-  _, y = dly.dline(x, y + cfg.sch * 2)
-
-
-def gratings(xpos, ypos):
-  x, y = key.frame(xpos, ypos, 1)
-  x, y = dev.filled(x, y, 0)
-  fgc.chips(x, y + cfg.sch * 2)
-
-
-def filled(xpos, ypos):
+def metal(xpos, ypos):
   key.frame(xpos, ypos, 2)
   dev.split('metal', 1, -1)
 
 
-def marks(xpos, ypos):
+def mark(xpos, ypos):
   x, y = key.frame(xpos, ypos, 2)
   dev.marks('metal', x, y, cfg.size, cfg.size)
   title = f'SiN Silicon Photonics'
@@ -66,17 +55,17 @@ def marks(xpos, ypos):
 
 def chips(region):
   if 0 in region: key.cross(0, 0)
-  # if 1 in region: icr(-1, 1)
-  # if 2 in region: pbses(1, 1)
-  # if 3 in region: hybrids(-1, -1)
-  # if 4 in region: filled(1, -1)
-  if 1 in region: waveguides(-1, 1)
-  if 4 in region: marks(1, -1)
+  # if 1 in region: delay_large(-1, 1)
+  # if 2 in region: delay_small(1, 1)
+  # if 3 in region: polarization(-1, -1)
+  if 3 in region: directional(-1, -1)
+  # if 4 in region: metal(1, -1)
+  if 4 in region: mark(1, -1)
 
 
 if __name__ == '__main__':
   cfg.draft = 'draft'
-  filename = f'SiN_V{cfg.ver}_{cfg.draft}'
+  filename = f'SiN150_V{cfg.ver}_{cfg.draft}'
   chips([0, 1, 2, 3, 4])
   # dev.savedxf(filename)
   dev.saveas(filename)

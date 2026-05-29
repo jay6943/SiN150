@@ -61,8 +61,8 @@ def device(layer, x, y):
   ch = cfg.sch * 0.5
 
   x3, y31, y32 = mzi(layer, x, y + cfg.s2x2, -1, 0)
-  x4, y41 = dev.sbend(x3, y31, 20,  ch)
-  x4, y42 = dev.sbend(x3, y32, 20, -ch)
+  x4, y41 = dev.sbend(x3, y31, 9,  ch)
+  x4, y42 = dev.sbend(x3, y32, 9, -ch)
   x5, _, y51 = mzi(layer, x4, y41 - cfg.s2x2, 1,  1)
   x5, y52, _ = mzi(layer, x4, y42 - cfg.s2x2, 1, -1)
 
@@ -84,7 +84,7 @@ def chip(x, y, lchip):
 
 
 def chips(x, y):
-  y += cfg.sch * 1.5
+  y += cfg.sch * 0.5
   lpbs = cfg.lpbs
   for cfg.lpbs in dxf.arange(44, 66, 1):
     _, y = chip(x, y, cfg.size)
@@ -96,6 +96,8 @@ def chips(x, y):
 
 if __name__ == '__main__':
   filename = 'pbs'
-  chips(0, 0)
-  dev.filled(0, 0, 1)
-  dev.saveas(filename)
+  # chips(0, 0)
+  chip(0, 0, cfg.size)
+  dev.savedxf(filename)
+  # dev.filled(0, 0, 1)
+  # dev.saveas(filename)

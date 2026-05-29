@@ -3,7 +3,6 @@ import ref
 import dxf
 import dev
 import tip
-import numpy as np
 
 
 def device(x, y, angle):
@@ -15,7 +14,7 @@ def device(x, y, angle):
 
 def chip(x, y, lchip):
   idev = len(ref.points)
-  x1, y1 = device(x, y, 30)
+  x1, y1 = device(x, y, 15)
   x2, y2 = dev.sline(x, y, x1 - x)
   x3, x4 = dxf.center(idev, x, x2, lchip)
 
@@ -30,7 +29,7 @@ def chip(x, y, lchip):
 
 def chips(x, y):
   sdci = cfg.sdci
-  for cfg.sdci in dxf.arange(1.5, 2.5, 0.1):
+  for cfg.sdci in dxf.arange(2.5, 4, 0.1):
     _, y = chip(x, y + cfg.sch * 2, cfg.size)
   cfg.sdci = sdci
   return x, y
@@ -38,4 +37,4 @@ def chips(x, y):
 
 if __name__ == '__main__':
   chips(0, 0)
-  dev.saveas('direction_coupler')
+  dev.savedxf('dci')

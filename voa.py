@@ -16,7 +16,7 @@ def arm(x, y, sign):
 
 
 def device(x, y):
-  angle, ch = 30, cfg.ch * 0.5
+  angle, ch = 15, cfg.ch * 0.5
 
   x2, y1, y2 = y1x2.device(x, y, 1)
   x3, y3 = dev.sbend(x2, y1, angle, ch - cfg.s1x2)
@@ -87,6 +87,8 @@ def chips(x, y):
 
 
 if __name__ == '__main__':
-  chips(0, 0)
-  dev.filled(0, 0, 1)
-  dev.saveas('voa')
+  # chips(0, 0)
+  chip(0, 0, 4000, cfg.size)
+  dev.savedxf('voa')
+  # dev.filled(0, 0, 1)
+  # dev.saveas('voa')
