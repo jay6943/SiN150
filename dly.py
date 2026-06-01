@@ -98,20 +98,18 @@ class delayline:
     x3, y3 = self.outest(x2, y2)
     x4, y4 = self.outport(x3, y3, y)
     cfg.radius = self.radius
+
     return x4, y4
 
 
 def dline(x, y, xp, dx, dy, dr, rmax):
   sf = delayline(xp, dx, dy, dr, rmax)
   x1, _ = sf.device(x + sf.xp, y)
-  length = sf.length + sf.xp + x + cfg.size - x1
+  tip.texts(x + sf.xp, y, x, '2nsec')
+  tip.texts(x1, y, x + cfg.size, '2nsec')
 
-  cm = length * 1e-4
-  ns = length * 1.601 / 3 * 1e-5
-  title = f'{ns:.1f} nsec'
-  tip.texts(x + sf.xp, y, x, title)
-  tip.texts(x1, y, x + cfg.size, title)
-  print('Delay length, time =', f'{cm:.3f} cm, {ns:.3f} nsec')
+  sf.length += sf.xp + x + cfg.size - x1
+  print('Length =', f'{sf.length * 1e-4:.3f} cm')
   
   return x, y + cfg.sch * 10
 
@@ -119,36 +117,38 @@ def dline(x, y, xp, dx, dy, dr, rmax):
 def dlmzi(x, y, xp, dx, dy, dr, rmax):
   y += cfg.sch * 4
   sf = delayline(xp, dx, dy, dr, rmax)
-  x2, _ = sf.device(x + sf.xp, y)
+  x1, _ = sf.device(x + sf.xp, y)
 
-  angle = 15
-  df = dev.euler(cfg.wg, cfg.radius, angle)
-  cf = dev.circular(cfg.wg, 5, 90)
-  x3, _, y32 = y2x2.device(x2, y - cfg.s2x2)
-  x6, y3 = dci.device(x + sf.xp - 500, y, angle)
-  dxf.bends('core', cf, x3, y32, 270, 1, -1)
+  angle, x2 = 15, x + sf.xp - 500
+  x3, y31, y32 = y2x2.device(x1, y - cfg.s2x2)
+  radius = cfg.radius
+  cfg.radius = 300
+  x9, y91 = dev.sbend(x3, y31, 15,  cfg.ch * 0.5)
+  x9, y92 = dev.sbend(x3, y32, 15, -cfg.ch * 0.5)
+  cfg.radius = radius
+  x6, y3 = dci.device(x2, y, angle)
   idev = len(ref.points)
-  x4, y4 = dev.sbend(x2, y3, angle, cfg.sch - cfg.s2x2 * 2)
-  x5, _ = dxf.move(idev, x2, y3, x4, y4, x2 - x4, 0, 0)
-  x7, _ = dev.sline(x6, y3, x5 - x6 + x2 - x4)
+  x4, y4 = dev.sbend(x1, y3, angle, cfg.sch - cfg.s2x2 * 2)
+  x5, _ = dxf.move(idev, x1, y3, x4, y4, x1 - x4, 0, 0)
+  x7, _ = dev.sline(x6, y3, x5 - x6 + x1 - x4)
   x8 = x6 + (x7 - x6 - cfg.lpad) * 0.5
-  # pad.bends(x8, y3, -1)
   pad.electrode('metal', x8, y3, cfg.lpad, 6, -1)
   pad.electrode('edge', x8, y3, cfg.lpad, cfg.eg, -1)
 
   tip.texts(x + sf.xp, y, x, '2 nsec')
-  tip.texts(x3, y, x + cfg.size, '2 nsec')
+  tip.texts(x9, y91, x + cfg.size, '2 nsec')
+  tip.texts(x9, y92, x + cfg.size, '2 nsec')
 
-  length = sf.length - (df.l * 4 + x3 - x2) + x4 - x3
-  print(f'Line {length / 10000:.3f} ({3 * 2 * 10 / 1.601:.3f}) cm')
+  sf.length -= x1 - x
+  print('Delay length =', f'{sf.length * 1e-4:.3f} cm')
+  print('Delay time =', f'{sf.length * 1.601 / 3 * 1e-5:.3f} nsec')
 
   return x, y + cfg.sch * 10
 
 
 def chips(x, y):
+  dlmzi(x, y + cfg.sch, 5000, 1415, 100, 100, 3000)
   tip.chip(x, y, cfg.size)
-  # x1, _ = dline(x, y + cfg.sch, 5600, 1415, 100, 100, 3000)
-  x1, _ = dlmzi(x, y + cfg.sch, 5600, 1415, 100, 100, 3000)
   return x, y
 
 
@@ -156,6 +156,6 @@ if __name__ == '__main__':
   filename = 'dly'
   chips(0, cfg.sch * 2)
   # dev.savedxf(filename)
-  dev.filled(0, 0, 1)
+  dev.filled(0, 0)
   dev.saveas(filename)
   dev.dlayers(filename, 'rect', 'edge')

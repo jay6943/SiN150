@@ -11,8 +11,6 @@ import dci
 def delay_line(xpos, ypos):
   x, y = key.frame(xpos, ypos, 1)
   x, y = dev.filled(x, y)
-  _, y = voa.chip(x, y + cfg.sch * 6, 4000, cfg.size)
-  _, y = tip.chip(x, y + cfg.sch * 6, cfg.size)
   _, y = dly.dlmzi(x, y + cfg.sch, 5600, 1415, 100, 100, 3000)
   dev.split('metal', 0, -1)
 
