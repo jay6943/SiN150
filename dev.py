@@ -61,19 +61,19 @@ def texts(x, y, title, scale, align):
   dxf.srect('edge', x, y + ysign * scale, xsign * (dx + d * 2), dy + 10)
 
 
-def marks(layer, x, y, xsize, ysize):
+def marks(layer, x, y):
   dl = 150
+  dx = x + cfg.size
+  dy = y + cfg.size
   dxf.triangle(layer, x, y, x + dl, y, x, y + dl)
-  dx = x + xsize
   dxf.triangle(layer, dx, y, dx - dl, y, dx, y + dl)
-  dy = y + ysize
   dxf.triangle(layer, x, dy, x + dl, dy, x, dy - dl)
   dxf.triangle(layer, dx, dy, dx - dl, dy, dx, dy - dl)
 
 
-def filled(x, y, sign):
+def filled(x, y):
   dxf.crect('rect', x, y, x + cfg.size, y + cfg.size)
-  if sign: marks('edge', x, y, cfg.size, cfg.size)
+  marks('edge', x, y)
   return x, y
 
 

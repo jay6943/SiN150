@@ -40,6 +40,7 @@ def chip(x, y, lchip):
 
 
 def chips(x, y):
+  y += cfg.sch
   wtip = cfg.wtip
   for cfg.wtip in dxf.arange(0.2, 0.4, 0.02):
     chip(x, y, cfg.size)
@@ -53,4 +54,4 @@ def chips(x, y):
 
 if __name__ == '__main__':
   chips(0, 0)
-  dev.savedxf('tip')
+  dev.saveas('tip')
