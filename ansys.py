@@ -2,6 +2,7 @@ import cfg
 import dxf
 import gds
 import dev
+import elr
 
 
 def bends(path):
@@ -44,18 +45,19 @@ def dc(path):
   gds.savelayer(f'{path}/dc{cfg.radius:.0f}r')
 
 
-def pbs(sign):
+def dc_pbs(path):
   wg = cfg.wg - cfg.dw
   cfg.radius = 500
   angle = 1
-  dy = 2 * sign
   lpbs = 395
   spacing = 2.4
-  ds = sign * (spacing + wg)
 
-  df = dev.euler(wg, cfg.radius, angle)
-  x1, y1 = dxf.srect('core', 0, dy + ds * 0.5, 10, wg)
-  x2, y2 = dxf.sbend('core', df, x1, y1, -dy)
+  df = elr.curve(wg, cfg.radius, angle, 'mask')
+
+  sign = -1
+  dy = sign * 2
+  ds = sign * (spacing + wg)
+  x2, y2 = dxf.sbend('core', df, 10, dy + ds * 0.5, -dy)
   x3, y3 = dxf.srect('core', x2, y2, lpbs, wg)
   x4, y4 = dxf.sbend('core', df, x3, y3, dy)
   x5, y5 = dxf.srect('core', x4, y4, lpbs, wg)
@@ -66,8 +68,22 @@ def pbs(sign):
   dxf.srect('core', x8, y8, 10, wg)
   dxf.sbend('core', df, x3, y4 + ds + dy, -dy)
 
+  sign = 1
+  dy = sign * 2
+  ds = sign * (spacing + wg)
+  x1, y1 = dxf.srect('core', 0, dy + ds * 0.5, 10, wg)
+  x2, y2 = dxf.sbend('core', df, x1, y1, -dy)
+  x3, y3 = dxf.srect('core', x2, y2, lpbs, wg)
+  x4, y4 = dxf.sbend('core', df, x3, y3, dy)
+  x5, y5 = dxf.srect('core', x4, y4, lpbs, wg)
+  x7, y7 = dxf.sbend('core', df, x5, y5, dy)
+  dxf.srect('core', x7, y7, 10, wg)
+
+  gds.savelayer(f'{path}/half_pbs')
+
 
 if __name__ == '__main__':
   cfg.draft = 'mask'
   workspace = '../../ansys'
-  dc(f'{workspace}/dc')
+  # dc(f'{workspace}/dc')
+  dc_pbs(cfg.path)

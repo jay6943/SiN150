@@ -28,11 +28,7 @@ lext = 500.0
 wtip = 0.3
 lpad = 400.0
 wpad = 10.0
-ldci = 22.3
-sdci = 4.0
-
-duty = 0.5
-period = 1.2
+sdci = 3.2
 
 size = 10000
 wkey = 400
