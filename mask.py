@@ -3,7 +3,6 @@ import dev
 import key
 import tip
 import dly
-import voa
 import pbs
 import dci
 
@@ -31,9 +30,9 @@ def marks(xpos, ypos):
 def chips(region):
   if 0 in region: key.cross(0, 0)
   if 1 in region: delay_line(-1, 1)
-  if 2 in region: pbs_dci_tip(1, 1)
-  if 3 in region: marks(-1, -1)
-  if 4 in region: marks(1, -1)
+  # if 2 in region: pbs_dci_tip(1, 1)
+  # if 3 in region: marks(-1, -1)
+  # if 4 in region: marks(1, -1)
 
 
 if __name__ == '__main__':

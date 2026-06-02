@@ -6,6 +6,8 @@ import dev
 import dci
 import tip
 import pad
+import voa
+import pbs
 import y2x2
 
 
@@ -98,7 +100,6 @@ class delayline:
     x3, y3 = self.outest(x2, y2)
     x4, y4 = self.outport(x3, y3, y)
     cfg.radius = self.radius
-
     return x4, y4
 
 
@@ -146,9 +147,17 @@ def dlmzi(x, y, xp, dx, dy, dr, rmax):
   return x, y + cfg.sch * 10
 
 
+def chip(x, y):
+  _, y = tip.chip(x, y, cfg.size)
+  _, y = dlmzi(x, y, 5100, 1415, 100, 100, 3000)
+  return x, y
+
+
 def chips(x, y):
-  dlmzi(x, y + cfg.sch, 5000, 1415, 100, 100, 3000)
-  tip.chip(x, y, cfg.size)
+  _, y = tip.chip(x, y, cfg.size)
+  _, y = pbs.chip(x, y + cfg.sch * 2, cfg.size)
+  _, y = voa.chip(x, y + cfg.sch * 6, 4000, cfg.size)
+  _, y = dlmzi(x, y + cfg.sch * 4, 5100, 1415, 100, 100, 3000)
   return x, y
 
 
