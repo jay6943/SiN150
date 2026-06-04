@@ -42,7 +42,7 @@ def chip(x, y, lchip):
 def chips(x, y):
   y += cfg.sch
   wtip = cfg.wtip
-  for cfg.wtip in dxf.arange(0.2, 0.4, 0.02):
+  for cfg.wtip in dxf.arange(0.33, 0.53, 0.02):
     chip(x, y, cfg.size)
     title = f'TIP-{cfg.wtip:.2f}'
     dev.texts(x + cfg.ltip, y - cfg.sch * 0.5, title, 0.3, 'rc')

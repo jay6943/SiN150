@@ -79,7 +79,7 @@ def dc_pbs(path):
   x7, y7 = dxf.sbend('core', df, x5, y5, dy)
   dxf.srect('core', x7, y7, 10, wg)
 
-  gds.savelayer(f'{path}/half_pbs')
+  gds.savelayer(f'{path}/dc_pbs')
 
 
 if __name__ == '__main__':

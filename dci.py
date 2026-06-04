@@ -29,10 +29,10 @@ def chip(x, y, lchip):
 
 def chips(x, y):
   sdci = cfg.sdci
-  for cfg.sdci in dxf.arange(2.5, 4, 0.1):
+  for cfg.sdci in dxf.arange(2.6, 4.0, 0.1):
     _, y = chip(x, y + cfg.sch * 2, cfg.size)
   cfg.sdci = sdci
-  return x, y
+  return x, y + cfg.sch
 
 
 if __name__ == '__main__':

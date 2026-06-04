@@ -106,11 +106,10 @@ class delayline:
 def dline(x, y, xp, dx, dy, dr, rmax):
   sf = delayline(xp, dx, dy, dr, rmax)
   x1, _ = sf.device(x + sf.xp, y)
-  tip.texts(x + sf.xp, y, x, '2nsec')
-  tip.texts(x1, y, x + cfg.size, '2nsec')
-
-  sf.length += sf.xp + x + cfg.size - x1
-  print('Length =', f'{sf.length * 1e-4:.3f} cm')
+  sf.length = (sf.length + sf.xp + x + cfg.size - x1) * 1e-4
+  tip.texts(x + sf.xp, y, x, f'{sf.length:.0f}cm')
+  tip.texts(x1, y, x + cfg.size, f'{sf.length:.0f}cm')
+  print('Length =', f'{sf.length:.3f} cm')
   
   return x, y + cfg.sch * 10
 
@@ -144,7 +143,7 @@ def dlmzi(x, y, xp, dx, dy, dr, rmax):
   print('Delay length =', f'{sf.length * 1e-4:.3f} cm')
   print('Delay time =', f'{sf.length * 1.601 / 3 * 1e-5:.3f} nsec')
 
-  return x, y + cfg.sch * 10
+  return x, y
 
 
 def chip(x, y):
@@ -155,9 +154,10 @@ def chip(x, y):
 
 def chips(x, y):
   _, y = tip.chip(x, y, cfg.size)
-  _, y = pbs.chip(x, y + cfg.sch * 2, cfg.size)
   _, y = voa.chip(x, y + cfg.sch * 6, 4000, cfg.size)
-  _, y = dlmzi(x, y + cfg.sch * 4, 5100, 1415, 100, 100, 3000)
+  _, y = dlmzi(x, y + cfg.sch * 5, 5100, 1415, 100, 100, 3000)
+  _, y = tip.chip(x, y + cfg.sch * 66, cfg.size)
+  _, y = pbs.chips(x, y)
   return x, y
 
 

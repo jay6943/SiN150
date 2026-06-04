@@ -10,7 +10,7 @@ import dci
 def delay_line(xpos, ypos):
   x, y = key.frame(xpos, ypos, 1)
   x, y = dev.filled(x, y)
-  _, y = dly.dlmzi(x, y + cfg.sch, 5600, 1415, 100, 100, 3000)
+  _, y = dly.chips(x, y + cfg.sch * 2)
   dev.split('metal', 0, -1)
 
 
@@ -18,8 +18,9 @@ def pbs_dci_tip(xpos, ypos):
   x, y = key.frame(xpos, ypos, 1)
   x, y = dev.filled(x, y)
   _, y = tip.chips(x, y + cfg.sch)
-  _, y = pbs.chips(x, y)
   _, y = dci.chips(x, y)
+  _, y = tip.chip(x, y, cfg.size)
+  _, y = dly.dline(x, y + cfg.sch, 7000, 3990, 100, 50, 2000)
 
 
 def marks(xpos, ypos):
@@ -30,7 +31,7 @@ def marks(xpos, ypos):
 def chips(region):
   if 0 in region: key.cross(0, 0)
   if 1 in region: delay_line(-1, 1)
-  # if 2 in region: pbs_dci_tip(1, 1)
+  if 2 in region: pbs_dci_tip(1, 1)
   # if 3 in region: marks(-1, -1)
   # if 4 in region: marks(1, -1)
 
