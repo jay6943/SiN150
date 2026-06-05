@@ -18,9 +18,9 @@ def pbs_dci_tip(xpos, ypos):
   x, y = key.frame(xpos, ypos, 1)
   x, y = dev.filled(x, y)
   _, y = tip.chips(x, y + cfg.sch)
-  _, y = dci.chips(x, y)
+  _, y = dci.chips(x, y - cfg.sch)
   _, y = tip.chip(x, y, cfg.size)
-  _, y = dly.dline(x, y + cfg.sch, 7000, 3990, 100, 50, 2000)
+  _, y = dly.dline(x, y + cfg.sch, 6100, 3000, 100, 50, 2500)
 
 
 def marks(xpos, ypos):
@@ -32,14 +32,14 @@ def chips(region):
   if 0 in region: key.cross(0, 0)
   if 1 in region: delay_line(-1, 1)
   if 2 in region: pbs_dci_tip(1, 1)
-  # if 3 in region: marks(-1, -1)
-  # if 4 in region: marks(1, -1)
+  if 3 in region: marks(-1, -1)
+  if 4 in region: marks(1, -1)
 
 
 if __name__ == '__main__':
   cfg.draft = 'draft'
   filename = f'SiN150_V{cfg.ver}_{cfg.draft}'
-  chips([0, 1, 2, 3, 4])
+  chips([0, 2])
   # dev.savedxf(filename)
   dev.saveas(filename)
   dev.dlayers(filename, 'rect', 'edge')
