@@ -14,7 +14,7 @@ def delay_line(xpos, ypos):
   _, y = tip.chip(x, y, cfg.size * 2)
   _, y = voa.chip(x, y + cfg.sch * 6, 4000, cfg.size)
   _, y = dly.dlmzi(x, y + cfg.sch * 5)
-  _, y = tip.chip(x, y + cfg.sch * 66, cfg.size)
+  _, y = tip.chip(x, y + cfg.sch * 2, cfg.size)
   _, y = pbs.chips(x, y)
   dev.split('metal', 0, -1)
 

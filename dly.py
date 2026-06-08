@@ -76,7 +76,7 @@ class delayline:
     x4, y4 = dev.sline(x3, y3, self.dx)
     x5, y5 = dev.bends(x4, y4, 90, 0, 1, -1)
     self.length += self.dx + self.dy + self.dr + 3 * df.l
-    return x5, y5
+    return x5, y5, y4
 
   def outport(self, x, y, dy):
     df = dev.euler(cfg.wg, cfg.radius, 90)
@@ -94,27 +94,27 @@ class delayline:
     x2, y2 = self.center(x1, y1)
     cfg.radius -= self.dr
     for _ in range(num): x2, y2 = self.outer(x2, y2)
-    x3, y3 = self.outest(x2, y2)
+    x3, y3, y4 = self.outest(x2, y2)
     cfg.radius = self.radius
-    x4, y4 = self.outport(x3, y3, y)
+    x4, _ = self.outport(x3, y3, y)
     return x4, y4
 
 
 def dline(x, y):
   sf = delayline(6100, 3000, 100, 50, 2500)
-  x1, _ = sf.device(x + sf.xp, y)
+  x1, y1 = sf.device(x + sf.xp, y)
   sf.length = (sf.length + sf.xp + x + cfg.size - x1) * 1e-4
   tip.texts(x + sf.xp, y, x, f'{sf.length:.0f}cm')
   tip.texts(x1, y, x + cfg.size, f'{sf.length:.0f}cm')
   print('Length =', f'{sf.length:.3f} cm')
   
-  return x, y + cfg.sch * 10
+  return x, y1
 
 
 def dlmzi(x, y):
   y += cfg.sch * 4
   sf = delayline(5100, 1415, 100, 100, 3000)
-  x1, _ = sf.device(x + sf.xp, y)
+  x1, y1 = sf.device(x + sf.xp, y)
 
   angle, x2 = 15, x + sf.xp - 500
   x3, y31, y32 = y2x2.device(x1, y - cfg.s2x2)
@@ -140,7 +140,7 @@ def dlmzi(x, y):
   print('Delay length =', f'{sf.length * 1e-4:.3f} cm')
   print('Delay time =', f'{sf.length * 1.601 / 3 * 1e-5:.3f} nsec')
 
-  return x, y
+  return x, y1
 
 
 if __name__ == '__main__':

@@ -46,7 +46,7 @@ def chip(x, y, lchip):
 
 def chips(x, y):
   spbs = cfg.spbs
-  for cfg.spbs in dxf.arange(2.1, 2.7, 0.1):
+  for cfg.spbs in dxf.arange(2.0, 2.7, 0.1):
     _, y = chip(x, y + cfg.sch * 2, cfg.size)
   cfg.spbs = spbs
 
