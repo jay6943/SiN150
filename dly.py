@@ -79,7 +79,6 @@ class delayline:
     return x5, y5
 
   def outport(self, x, y, dy):
-    cfg.radius = 500
     df = dev.euler(cfg.wg, cfg.radius, 90)
     x1, y1 = dev.tline(x, y, dy - y + df.dy)
     x2, y2 = dev.bends(x1, y1, 90, 270, 1, 1)
@@ -96,8 +95,8 @@ class delayline:
     cfg.radius -= self.dr
     for _ in range(num): x2, y2 = self.outer(x2, y2)
     x3, y3 = self.outest(x2, y2)
-    x4, y4 = self.outport(x3, y3, y)
     cfg.radius = self.radius
+    x4, y4 = self.outport(x3, y3, y)
     return x4, y4
 
 
