@@ -103,8 +103,8 @@ class delayline:
     return x4, y4
 
 
-def dline(x, y, xp, dx, dy, dr, rmax):
-  sf = delayline(xp, dx, dy, dr, rmax)
+def dline(x, y):
+  sf = delayline(6100, 3000, 100, 50, 2500)
   x1, _ = sf.device(x + sf.xp, y)
   sf.length = (sf.length + sf.xp + x + cfg.size - x1) * 1e-4
   tip.texts(x + sf.xp, y, x, f'{sf.length:.0f}cm')
@@ -114,9 +114,9 @@ def dline(x, y, xp, dx, dy, dr, rmax):
   return x, y + cfg.sch * 10
 
 
-def dlmzi(x, y, xp, dx, dy, dr, rmax):
+def dlmzi(x, y):
   y += cfg.sch * 4
-  sf = delayline(xp, dx, dy, dr, rmax)
+  sf = delayline(5100, 1415, 100, 100, 3000)
   x1, _ = sf.device(x + sf.xp, y)
 
   angle, x2 = 15, x + sf.xp - 500
@@ -146,24 +146,9 @@ def dlmzi(x, y, xp, dx, dy, dr, rmax):
   return x, y
 
 
-def chip(x, y):
-  _, y = tip.chip(x, y, cfg.size)
-  _, y = dlmzi(x, y, 5100, 1415, 100, 100, 3000)
-  return x, y
-
-
-def chips(x, y):
-  _, y = tip.chip(x, y, cfg.size)
-  _, y = voa.chip(x, y + cfg.sch * 6, 4000, cfg.size)
-  _, y = dlmzi(x, y + cfg.sch * 5, 5100, 1415, 100, 100, 3000)
-  _, y = tip.chip(x, y + cfg.sch * 66, cfg.size)
-  _, y = pbs.chips(x, y)
-  return x, y
-
-
 if __name__ == '__main__':
   filename = 'dly'
-  chips(0, cfg.sch * 2)
+  dlmzi(0, 0)
   # dev.savedxf(filename)
   dev.filled(0, 0)
   dev.saveas(filename)
