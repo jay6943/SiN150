@@ -11,11 +11,11 @@ import dci
 def delay_line(xpos, ypos):
   x, y = key.frame(xpos, ypos, 1)
   x, y = dev.filled(x, y)
-  _, y = tip.chip(x, y, cfg.size * 2)
-  _, y = voa.chip(x, y + cfg.sch * 6, 4000, cfg.size)
-  _, y = dly.dlmzi(x, y + cfg.sch * 5)
   _, y = tip.chip(x, y + cfg.sch * 2, cfg.size)
+  _, y = dly.dlmzi(x, y + cfg.sch)
+  _, y = tip.chip(x, y + cfg.sch, cfg.size)
   _, y = pbs.chips(x, y)
+  _, y = voa.chip(x, y + cfg.sch * 5, 4000, cfg.size)
   dev.split('metal', 0, -1)
 
 
@@ -42,9 +42,9 @@ def chips(region):
 
 
 if __name__ == '__main__':
-  cfg.draft = 'draft'
+  cfg.draft = 'mask'
   filename = f'SiN150_V{cfg.ver}_{cfg.draft}'
-  chips([0, 1, 2])
+  chips([0, 1, 2, 3, 4])
   # dev.savedxf(filename)
   dev.saveas(filename)
   dev.dlayers(filename, 'rect', 'edge')

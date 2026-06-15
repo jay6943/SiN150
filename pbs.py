@@ -23,7 +23,8 @@ def device(x, y):
   dxf.bends('core', df, x3, y6, 0, -1, -1)
   dxf.bends('core', df, x4, y4, 0, 1, 1)
   df = elr.curve(cfg.wg, cfg.radius, 9, cfg.draft)
-  x7, y7 = dxf.sbend('core', df, x6, y6, -dy * 2)
+  # x7, y7 = dxf.sbend('core', df, x6, y6, -dy * 2)
+  x7, y7 = dxf.sbend('core', df, x6, y6, y - y6 - cfg.ch)
   dxf.srect('core', x5, y5, x7 - x5, cfg.wg)
   dxf.crect('edge', x, y + cfg.eg * 0.5, x7, y7 - cfg.eg * 0.5)
 
@@ -35,10 +36,10 @@ def chip(x, y, lchip):
   x1, _, _ = device(x, y)
   x5, x6 = dxf.center(idev, x, x1, lchip)
 
-  title = f'PBS-{cfg.spbs:.1f}g'
+  title = f'PBS-{cfg.spbs:.1f}'
   tip.texts(x5, y, x, title)
   tip.texts(x6, y, x + lchip, title)
-  tip.sline(x6, y - cfg.sch, x + lchip)
+  tip.sline(x6, y - cfg.ch, x + lchip)
   print(title)
 
   return x + lchip, y
@@ -46,8 +47,8 @@ def chip(x, y, lchip):
 
 def chips(x, y):
   spbs = cfg.spbs
-  for cfg.spbs in dxf.arange(2.0, 2.7, 0.1):
-    _, y = chip(x, y + cfg.sch * 2, cfg.size)
+  for cfg.spbs in dxf.arange(2.1, 2.7, 0.1):
+    _, y = chip(x, y + cfg.ch * 2, cfg.size)
   cfg.spbs = spbs
 
   return x + cfg.size, y

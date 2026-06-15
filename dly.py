@@ -120,8 +120,8 @@ def dlmzi(x, y):
   x3, y31, y32 = y2x2.device(x1, y - cfg.s2x2)
   radius = cfg.radius
   cfg.radius = 300
-  x9, y91 = dev.sbend(x3, y31, 15,  cfg.ch * 0.5)
-  x9, y92 = dev.sbend(x3, y32, 15, -cfg.ch * 0.5)
+  x9, y91 = dev.sbend(x3, y31, 15,  cfg.ch * 0.5 - cfg.s2x2)
+  x9, y92 = dev.sbend(x3, y32, 15,  cfg.s2x2 - cfg.ch * 0.5)
   cfg.radius = radius
   x6, y3 = dci.device(x2, y, angle)
   idev = len(ref.points)
