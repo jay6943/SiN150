@@ -56,7 +56,9 @@ def tooling(x, y, size, rmax):
 
 
 def cell_position_1x4():
-  labels = ['01', '02', '03', '04'] * 2
+  # labels = ['01', '02', '03', '04'] * 2
+  # labels.insert(4, '00')
+  labels = ['01-03', '01-03', '02-04', '02-04'] * 2
   labels.insert(4, '00')
   labels = [labels[:] for _ in range(9)]
   nx, ny = len(labels[0]), len(labels)
@@ -92,4 +94,4 @@ def cell_position_3x1():
   dev.saveas('mapping')
 
 
-if __name__ == '__main__': cell_position_3x1()
+if __name__ == '__main__': cell_position_1x4()
