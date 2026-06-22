@@ -30,6 +30,9 @@ lpad = 400.0
 wpad = 10.0
 sdci = 3.2
 
+duty = 0.5
+period = 1.0
+
 size = 10000
 wkey = 400
 wbar = 250

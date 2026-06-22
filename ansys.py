@@ -3,6 +3,7 @@ import dxf
 import gds
 import dev
 import elr
+import fgc
 
 
 def bends(path):
@@ -82,8 +83,15 @@ def dc_pbs(path):
   gds.savelayer(f'{path}/dc_pbs')
 
 
+def grating_coupler(path):
+  fgc.grating('core', 0, 0, 1, 0)
+  dxf.srect('core', -10, 0, 10, cfg.wg - cfg.dw)
+  gds.savelayer(f'{path}/grating_{cfg.period}_{cfg.duty}')
+
+
 if __name__ == '__main__':
   cfg.draft = 'mask'
   workspace = '../../ansys'
   # dc(f'{workspace}/dc')
-  dc_pbs(cfg.path)
+  # dc_pbs(cfg.path)
+  grating_coupler(f'{workspace}/Grating coupler/SiN-2.6')
