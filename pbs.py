@@ -9,7 +9,7 @@ import elr
 def device(x, y):
   df = elr.curve(cfg.wg, cfg.radius, 5, cfg.draft)
   ch = 25
-  ds = cfg.spbs + cfg.wg - cfg.dw
+  ds = cfg.spbs + cfg.wg
   dy = ch - ds * 0.5
   x1, y1 = dxf.sbend('core', df, x, y, -dy)
   x2, y2 = dxf.srect('core', x1, y1, cfg.lpbs, cfg.wg)

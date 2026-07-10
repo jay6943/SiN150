@@ -5,24 +5,23 @@ path = f'../../mask/SiN150-{ver}'
 if not os.path.isdir(path): os.mkdir(path)
 draft = 'draft'
 
-dw = 0.1
-wg = 2.0 + dw
+wg = 2.0
 eg = 40.0
 ch = 127.0
 sch = 100.0
 radius = 500.0
 angle = 6.0
 
-w1x2 = 8.4 + dw
+w1x2 = 8.4
 l1x2 = 37.0
 s1x2 = 2.2
-w2x2 = 12.6 + dw
+w2x2 = 12.6
 l2x2 = 107.0
 s2x2 = 2.3
 lpbs = 395.0
 spbs = 2.4
 ltpr = 5.0
-wtpr = 3.0 + dw
+wtpr = 3.0
 ltip = 700.0
 lext = 500.0
 wtip = 0.435
