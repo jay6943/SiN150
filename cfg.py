@@ -8,7 +8,6 @@ draft = 'draft'
 wg = 2.0
 eg = 40.0
 ch = 127.0
-sch = 100.0
 radius = 500.0
 angle = 6.0
 
@@ -19,15 +18,15 @@ w2x2 = 12.6
 l2x2 = 107.0
 s2x2 = 2.3
 lpbs = 395.0
-spbs = 2.4
+spbs = 4.4
 ltpr = 5.0
 wtpr = 3.0
 ltip = 700.0
 lext = 500.0
-wtip = 0.435
+wtip = 0.44
 lpad = 400.0
 wpad = 10.0
-sdci = 3.2
+stap = 3.6
 
 duty = 0.5
 period = 1.0

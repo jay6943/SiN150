@@ -3,7 +3,7 @@ import cfg
 import ref
 import dxf
 import dev
-import dci
+import tap
 import tip
 import pad
 import y2x2
@@ -112,7 +112,7 @@ def dline(x, y):
 
 
 def dlmzi(x, y):
-  y += cfg.sch * 4
+  y += cfg.ch * 4
   sf = delayline(5100, 1415, 100, 100, 3000)
   x1, y1 = sf.device(x + sf.xp, y)
 
@@ -123,9 +123,9 @@ def dlmzi(x, y):
   x9, y91 = dev.sbend(x3, y31, 15,  cfg.ch * 0.5 - cfg.s2x2)
   x9, y92 = dev.sbend(x3, y32, 15,  cfg.s2x2 - cfg.ch * 0.5)
   cfg.radius = radius
-  x6, y3 = dci.device(x2, y, angle)
+  x6, y3 = tap.device(x2, y, angle)
   idev = len(ref.points)
-  x4, y4 = dev.sbend(x1, y3, angle, cfg.sch - cfg.s2x2 * 2)
+  x4, y4 = dev.sbend(x1, y3, angle, cfg.ch - cfg.s2x2 * 2)
   x5, _ = dxf.move(idev, x1, y3, x4, y4, x1 - x4, 0, 0)
   x7, _ = dev.sline(x6, y3, x5 - x6 + x1 - x4)
   x8 = x6 + (x7 - x6 - cfg.lpad) * 0.5

@@ -6,9 +6,9 @@ import tip
 
 
 def device(x, y, angle):
-  y -= cfg.sdci
+  y -= cfg.stap
   dev.bends(x, y, angle, 0, -1, -1)
-  x1, y1 = dev.sbend(x, y, angle, cfg.sdci - cfg.sch)
+  x1, y1 = dev.sbend(x, y, angle, cfg.stap - cfg.ch)
   return x1, y1
 
 
@@ -18,23 +18,23 @@ def chip(x, y, lchip):
   x2, y2 = dev.sline(x, y, x1 - x)
   x3, x4 = dxf.center(idev, x, x2, lchip)
 
-  title = f'DC-{cfg.sdci:.1f}'
+  title = f'TAP-{cfg.stap:.1f}'
   tip.texts(x3, y, x, title)
   tip.texts(x4, y, x + lchip, title)
-  tip.sline(x4, y - cfg.sch, x + lchip)
+  tip.sline(x4, y - cfg.ch, x + lchip)
   print(title)
 
   return x, y
 
 
-def chips(x, y):
-  sdci = cfg.sdci
-  for cfg.sdci in dxf.arange(2.6, 4.0, 0.1):
-    _, y = chip(x, y + cfg.sch * 2, cfg.size)
-  cfg.sdci = sdci
-  return x, y + cfg.sch
+def chips(x, y, ranges):
+  stap = cfg.stap
+  for cfg.stap in ranges:
+    _, y = chip(x, y + cfg.ch * 2, cfg.size)
+  cfg.stap = stap
+  return x, y + cfg.ch
 
 
 if __name__ == '__main__':
   chips(0, 0)
-  dev.savedxf('dci')
+  dev.savedxf('tap')
