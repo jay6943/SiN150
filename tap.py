@@ -14,8 +14,8 @@ def device(x, y, angle):
 
 def chip(x, y, lchip):
   idev = len(ref.points)
-  x1, y1 = device(x, y, 15)
-  x2, y2 = dev.sline(x, y, x1 - x)
+  x1, _ = device(x, y, 15)
+  x2, _ = dev.sline(x, y, x1 - x)
   x3, x4 = dxf.center(idev, x, x2, lchip)
 
   title = f'TAP-{cfg.stap:.1f}'

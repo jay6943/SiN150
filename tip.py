@@ -23,6 +23,15 @@ def sline(x, y, xend):
   return x2, y
 
 
+def refer(x, y):
+  ch = cfg.ch * 0.5
+  title = 'ref'
+  chip(x, y, cfg.size)
+  dev.texts(x + cfg.ltip, y - ch, title, 0.3, 'rc')
+  dev.texts(x + cfg.size - cfg.ltip, y - ch, title, 0.3, 'lc')
+  return x, y
+
+
 def texts(x, y, xend, title):
   if xend > x: sign, align = 1, 'lc'
   else: sign, align = -1, 'rc'

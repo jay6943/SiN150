@@ -7,7 +7,7 @@ def wgs(x, y, align):
   sign = 1 if 'l' in align[0] else -1
   dxf.srect('core', x, y + cfg.s2x2, sign * cfg.lext, cfg.wg)
   x1, _ = dxf.srect('edge', x, y, sign * cfg.lext, cfg.eg)
-  dev.texts(x1, y, 'WG', 0.3, align)
+  dev.texts(x1, y, f'WG {cfg.wg:.1f}', 0.3, align)
 
 
 def pbses(x, y, align):
@@ -21,31 +21,33 @@ def pbses(x, y, align):
 def couplers(x, y, align):
   sign = 1 if 'l' in align[0] else -1
   dxf.srect('core', x, y, sign * cfg.lext, cfg.wg)
-  dxf.srect('core', x, y + cfg.sdci, sign * cfg.lext, cfg.wg)
+  dxf.srect('core', x, y + cfg.stap, sign * cfg.lext, cfg.wg)
   x1, _ = dxf.srect('edge', x, y, sign * cfg.lext, cfg.eg)
-  dev.texts(x1, y, 'DC', 0.3, align)
+  dev.texts(x1, y, f'TAP {cfg.stap:.1f}', 0.3, align)
 
 
 def tips(x, y, align):
   sign = 1 if 'l' in align[0] else -1
-  for w in [0.2, 0.3, 0.4]:
-    title = f'TIP {w}'
+  for w in [0.34, 0.44, 0.54]:
+    title = f'TIP {w:.2f}'
     dxf.srect('core', x, y, sign * cfg.lext, w)
     x1, _ = dxf.srect('edge', x, y, sign * cfg.lext, cfg.eg)
     dev.texts(x1, y, title, 0.3, align)
-    y += cfg.sch
+    y += cfg.ch
 
 
 def chips(x, y):
   for i, align in enumerate(['lc', 'rc']):
     wgs(x + cfg.size * i, y, align)
-    pbses(x + cfg.size * i, y + cfg.sch, align)
-    couplers(x + cfg.size * i, y + cfg.sch * 2, align)
-    tips(x + cfg.size * i, y + cfg.sch * 3, align)
+    pbses(x + cfg.size * i, y + cfg.ch, align)
+    couplers(x + cfg.size * i, y + cfg.ch * 2, align)
+    tips(x + cfg.size * i, y + cfg.ch * 3, align)
 
-  return x, y + cfg.sch * 9
+  return x, y + cfg.ch * 9
 
 
 if __name__ == '__main__':
   chips(0, 0)
-  dev.saveas('sem')
+  # dev.saveas('sem')
+  dev.savedxf('sem')
+  dev.dxf2gds('sem')

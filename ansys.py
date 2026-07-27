@@ -16,12 +16,13 @@ def bends(path):
 
 
 def sbend(path):
-  angle, dy, dl, length = 25, 50, 10, 250
-  df = dev.euler(cfg.wg, cfg.radius, angle)
+  radius = 100
+  angle, dy, dl, length = 45, 50, 10, 250
+  df = dev.euler(cfg.wg, radius, angle)
   x1, y1 = dxf.srect('core', -dl, 0, dl, cfg.wg)
   x2, y2 = dxf.sbend('core', df, x1, y1, dy)
   dxf.srect('core', x2, y2, length - x2, cfg.wg)
-  gds.savelayer(f'{path}/{cfg.radius:.0f}r_{dy:.0f}h')
+  gds.savelayer(f'{path}/0.15t-{radius:.0f}r_{angle:.0f}a')
 
 
 def ubend(path):
@@ -85,6 +86,4 @@ def grating_coupler(path):
 if __name__ == '__main__':
   cfg.draft = 'mask'
   workspace = '../../ansys'
-  # dc(f'{workspace}/dc')
-  # dc_pbs(cfg.path)
-  grating_coupler(f'{workspace}/Grating coupler/SiN-2.6')
+  sbend(f'{workspace}/euler')

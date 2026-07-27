@@ -31,9 +31,9 @@ stap = 3.6
 duty = 0.5
 period = 1.0
 
-size = 10000
-wkey = 400
-wbar = 250
+size = 10000.0
+wkey = 400.0
+wbar = 250.0
 tkey = wkey + wbar
 lkey = size + wkey
 lbar = size + wkey + wbar
