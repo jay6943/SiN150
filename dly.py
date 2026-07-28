@@ -30,7 +30,7 @@ class delayline:
     x6, y6 = dev.tline(x5, y5, 0 - self.dy - self.dr)
     x7, y7 = dev.bends(x6, y6, 90, 270, 1, 1)
     x8, y8 = dev.sline(x7, y7, self.dx)
-    self.length += 2 * (self.dx + self.dy + 2 * self.dr + 2 * df.l)
+    self.length += 2 * (self.dx + self.dy + 2 * self.dr + 2 * df.length)
     return x8, y8
 
   def center(self, x, y):
@@ -50,7 +50,7 @@ class delayline:
     x6, y6 = dev.tline(x5, y5, 0 - self.dy - self.dr * 2)
     x7, y7 = dev.bends(x6, y6, 90, 90, 1, -1)
     x8, y8 = dev.sline(x7, y7, -dl)
-    self.length += 2 * (self.dy + 2 * df.l - dl) + 5 * self.dr
+    self.length += 2 * (self.dy + 2 * df.length - dl) + 5 * self.dr
     return x8, y8
 
   def outer(self, x, y):
@@ -64,7 +64,7 @@ class delayline:
     x6, y6 = dev.tline(x5, y5, 0 - self.dy - self.dr * 3)
     x7, y7 = dev.bends(x6, y6, 90, 90, 1, -1)
     x8, y8 = dev.sline(x7, y7, 0 - self.dx)
-    self.length += 2 * (self.dx + self.dy + 2 * self.dr + 2 * df.l)
+    self.length += 2 * (self.dx + self.dy + 2 * self.dr + 2 * df.length)
     return x8, y8
 
   def outest(self, x, y):
@@ -75,14 +75,14 @@ class delayline:
     x3, y3 = dev.bends(x2, y2, 90, 90, -1, 1)
     x4, y4 = dev.sline(x3, y3, self.dx)
     x5, y5 = dev.bends(x4, y4, 90, 0, 1, -1)
-    self.length += self.dx + self.dy + self.dr + 3 * df.l
+    self.length += self.dx + self.dy + self.dr + 3 * df.length
     return x5, y5, y4
 
   def outport(self, x, y, dy):
     df = dev.euler(cfg.wg, cfg.radius, 90)
     x1, y1 = dev.tline(x, y, dy - y + df.dy)
     x2, y2 = dev.bends(x1, y1, 90, 270, 1, 1)
-    self.length += dy - y + df.dy + df.l
+    self.length += dy - y + df.dy + df.length
     return x2, y2
 
   def device(self, x, y):
