@@ -1,5 +1,5 @@
 import cfg
-import ref
+import dat
 import dxf
 import dev
 import tip
@@ -32,7 +32,7 @@ def device(x, y):
 def polarizer(x, y, sign):
   radius = cfg.radius
   cfg.radius, angle = 100, 45
-  idev = len(ref.points)
+  idev = len(dat.points)
   x1, y1 = x, y
   for _ in range(10):
     x2, y2 = dev.sbend(x1, y1, angle,  sign * cfg.ch)
@@ -45,7 +45,7 @@ def polarizer(x, y, sign):
 
 
 def chip(x, y, lchip):
-  idev = len(ref.points)
+  idev = len(dat.points)
   x1, _, _ = device(x, y)
   x2, x3 = dxf.center(idev, x, x1, lchip)
   title = f'PBS-{cfg.spbs:.1f}'

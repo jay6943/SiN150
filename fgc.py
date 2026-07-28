@@ -1,6 +1,6 @@
 import os
 import cfg
-import ref
+import dat
 import dxf
 import dev
 import tip
@@ -43,7 +43,7 @@ def grating(layer, x, y, sign):
   w = round(cfg.wg, 3)
   d = round(cfg.duty * 100, 3)
   p = round(cfg.period, 3)
-  fp = f'{ref.libs}/coupler_{w}_{p}_{d:.0f}.npy'
+  fp = f'{dat.libs}/coupler_{w}_{p}_{d:.0f}.npy'
   if not os.path.isfile(fp): device(fp)
   df = np.load(fp, allow_pickle=True).item()
   dxf.appends(layer, df['guide'] * [sign, 1] + [x, y])

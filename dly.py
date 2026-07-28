@@ -1,6 +1,6 @@
 import sys
 import cfg
-import ref
+import dat
 import dxf
 import dev
 import tap
@@ -124,7 +124,7 @@ def dlmzi(x, y):
   x9, y92 = dev.sbend(x3, y32, 15,  cfg.s2x2 - cfg.ch * 0.5)
   cfg.radius = radius
   x6, y3 = tap.device(x2, y, angle)
-  idev = len(ref.points)
+  idev = len(dat.points)
   x4, y4 = dev.sbend(x1, y3, angle, cfg.ch - cfg.s2x2 * 2)
   x5, _ = dxf.move(idev, x1, y3, x4, y4, x1 - x4, 0, 0)
   x7, _ = dev.sline(x6, y3, x5 - x6 + x1 - x4)

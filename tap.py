@@ -1,5 +1,5 @@
 import cfg
-import ref
+import dat
 import dxf
 import dev
 import tip
@@ -13,7 +13,7 @@ def device(x, y, angle):
 
 
 def chip(x, y, lchip):
-  idev = len(ref.points)
+  idev = len(dat.points)
   x1, _ = device(x, y, 15)
   x2, _ = dev.sline(x, y, x1 - x)
   x3, x4 = dxf.center(idev, x, x2, lchip)
