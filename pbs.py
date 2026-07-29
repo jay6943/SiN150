@@ -37,9 +37,9 @@ def polarizer(x, y, sign):
   for _ in range(10):
     x2, y2 = dev.sbend(x1, y1, angle,  sign * cfg.ch)
     x1, y1 = dev.sbend(x2, y2, angle, -sign * cfg.ch)
-  x3, x4 = dxf.center(idev, x, x1, cfg.size)
+  x3, x4 = dxf.center(idev, x, x1, cfg.lchip)
   tip.texts(x3, y, x, '100R')
-  tip.texts(x4, y, x + cfg.size, 'Polarizer')
+  tip.texts(x4, y, x + cfg.lchip, 'Polarizer')
   cfg.radius = radius
   return x, y + cfg.ch
 
@@ -59,9 +59,9 @@ def chip(x, y, lchip):
 def chips(x, y, ranges):
   spbs = cfg.spbs
   for cfg.spbs in ranges:
-    _, y = chip(x, y + cfg.ch * 2, cfg.size)
+    _, y = chip(x, y + cfg.ch * 2, cfg.lchip)
   cfg.spbs = spbs
-  return x + cfg.size, y
+  return x + cfg.lchip, y
 
 
 if __name__ == '__main__':

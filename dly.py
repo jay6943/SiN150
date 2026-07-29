@@ -103,9 +103,9 @@ class delayline:
 def dline(x, y):
   sf = delayline(6100, 3000, 100, 50, 2500)
   x1, y1 = sf.device(x + sf.xp, y)
-  sf.length = (sf.length + sf.xp + x + cfg.size - x1) * 1e-4
+  sf.length = (sf.length + sf.xp + x + cfg.lchip - x1) * 1e-4
   tip.texts(x + sf.xp, y, x, f'{sf.length:.0f}cm')
-  tip.texts(x1, y, x + cfg.size, f'{sf.length:.0f}cm')
+  tip.texts(x1, y, x + cfg.lchip, f'{sf.length:.0f}cm')
   print('Length =', f'{sf.length:.3f} cm')
   
   return x, y1
@@ -133,8 +133,8 @@ def dlmzi(x, y):
   pad.electrode('edge', x8, y3, cfg.lpad, cfg.eg, -1)
 
   tip.texts(x + sf.xp, y, x, '2 nsec')
-  tip.texts(x9, y91, x + cfg.size, '2 nsec')
-  tip.texts(x9, y92, x + cfg.size, '2 nsec')
+  tip.texts(x9, y91, x + cfg.lchip, '2 nsec')
+  tip.texts(x9, y92, x + cfg.lchip, '2 nsec')
 
   sf.length -= x1 - x
   print('Delay length =', f'{sf.length * 1e-4:.3f} cm')

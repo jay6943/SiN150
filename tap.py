@@ -30,7 +30,7 @@ def chip(x, y, lchip):
 def chips(x, y, ranges):
   stap = cfg.stap
   for cfg.stap in ranges:
-    _, y = chip(x, y + cfg.ch * 2, cfg.size)
+    _, y = chip(x, y + cfg.ch * 2, cfg.lchip)
   cfg.stap = stap
   return x, y + cfg.ch
 

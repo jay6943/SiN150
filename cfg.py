@@ -31,13 +31,14 @@ stap = 3.6
 duty = 0.5
 period = 1.0
 
-size = 10000.0
+lchip = 10000.0
+lsize = 10000.0
 wkey = 400.0
 wbar = 250.0
 tkey = wkey + wbar
-lkey = size + wkey
-lbar = size + wkey + wbar
-skey = size + wkey + wbar * 2
+lkey = lsize + wkey
+lbar = lsize + wkey + wbar
+skey = lsize + wkey + wbar * 2
 area = [[0, 0], [-1, 0], [0, 0], [-1, -1], [0, -1]]
 
 labels = {

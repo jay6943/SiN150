@@ -18,7 +18,7 @@ def amzi(xpos, ypos):
   _, y = tip.refer(x, y + cfg.ch * 2)
   _, y = dly.dlmzi(x, y + cfg.ch)
   _, y = tip.chips(x, y + cfg.ch, dxf.arange(0.34, 0.54, 0.02))
-  _, y = voa.chip(x, y + cfg.ch * 4, 4000, cfg.size)
+  _, y = voa.chip(x, y + cfg.ch * 4, 4000, cfg.lchip)
   dev.split('metal', 0, -1)
 
 

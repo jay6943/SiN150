@@ -63,8 +63,8 @@ def texts(x, y, title, scale, align):
 
 def marks(layer, x, y):
   dl = 150
-  dx = x + cfg.size
-  dy = y + cfg.size
+  dx = x + cfg.lchip
+  dy = y + cfg.lchip
   dxf.triangle(layer, x, y, x + dl, y, x, y + dl)
   dxf.triangle(layer, dx, y, dx - dl, y, dx, y + dl)
   dxf.triangle(layer, x, dy, x + dl, dy, x, dy - dl)
@@ -72,7 +72,7 @@ def marks(layer, x, y):
 
 
 def filled(x, y):
-  dxf.crect('rect', x, y, x + cfg.size, y + cfg.size)
+  dxf.crect('rect', x, y, x + cfg.lsize, y + cfg.lsize)
   marks('edge', x, y)
   return x, y
 
