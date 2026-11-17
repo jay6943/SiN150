@@ -7,7 +7,7 @@ draft = 'draft'
 
 wg = 2.0
 eg = 40.0
-ch = 127.0
+ch = 100.0
 radius = 500.0
 angle = 6.0
 
