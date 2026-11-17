@@ -1,6 +1,6 @@
 import os
 
-ver = '1.1'
+ver = '1.2'
 path = f'../../mask/SiN150-{ver}'
 if not os.path.isdir(path): os.mkdir(path)
 draft = 'draft'
@@ -9,7 +9,6 @@ wg = 2.0
 eg = 40.0
 ch = 100.0
 radius = 500.0
-angle = 6.0
 
 w1x2 = 8.4
 l1x2 = 37.0
@@ -27,9 +26,6 @@ wtip = 0.44
 lpad = 400.0
 wpad = 10.0
 stap = 3.6
-
-duty = 0.5
-period = 1.0
 
 lchip = 10000.0
 lsize = 10000.0
