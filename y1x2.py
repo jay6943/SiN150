@@ -35,9 +35,9 @@ def chip(x, y, lchip):
   x5, x6 = dxf.center(idev, x, x2, lchip)
 
   title = f'1x2-{cfg.l1x2:.1f}'
-  tip.texts(x5, y, x, title)
-  tip.texts(x6, y1, x + lchip, title)
-  tip.sline(x6, y2, x + lchip)
+  tip.sline(x5, y, x, title)
+  tip.sline(x6, y1, x + lchip, title)
+  tip.sline(x6, y2, x + lchip, '')
   print(f'{title}; {x6 - x5:.0f}')
 
   return x + lchip, y

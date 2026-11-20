@@ -16,7 +16,7 @@ def amzi(xpos, ypos):
   x, y = key.frame(xpos, ypos, 1)
   x, y = dev.filled(x, y)
   _, y = tip.refer(x, y + cfg.ch * 2)
-  _, y = dly.dlmzi(x, y + cfg.ch)
+  _, y = dly.device(x, y + cfg.ch)
   _, y = tip.chips(x, y + cfg.ch, dxf.arange(0.34, 0.54, 0.02))
   _, y = voa.chip(x, y + cfg.ch * 4, 4000, cfg.lchip)
   dev.split('metal', 0, -1)
@@ -27,7 +27,6 @@ def delay(xpos, ypos):
   x, y = dev.filled(x, y)
   _, y = tap.chips(x, y + cfg.ch, dxf.arange(3.0, 4.4, 0.1))
   _, y = tip.refer(x, y)
-  _, y = dly.dline(x, y + cfg.ch)
   sem.chips(x, y - cfg.ch * 4)
 
 
@@ -59,7 +58,6 @@ def chips(region):
 
 
 if __name__ == '__main__':
-  cfg.draft = 'mask'
   filename = f'SiN150_V{cfg.ver}_{cfg.draft}'
   chips([0, 1, 2, 3, 4])
   # dev.savedxf(filename)

@@ -8,6 +8,7 @@ draft = 'draft'
 wg = 2.0
 eg = 40.0
 ch = 100.0
+dr = 100.0
 radius = 500.0
 
 w1x2 = 8.4
