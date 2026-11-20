@@ -1,0 +1,50 @@
+{
+    "version": 1.2,
+    "path": "../../mask/SiN150",
+    "waveguide width": 2.0,
+    "waveguide etched width": 40.0,
+    "channel spacing": 100.0,
+    "radius": 500.0,
+    "tilted angle": 6.0,
+    "1x2": {
+        "width": 8.4,
+        "length": 37.0,
+        "spacing": 2.2
+    },
+    "2x2": {
+        "width": 12.6,
+        "length": 107.0,
+        "spacing": 2.3
+    },
+    "4x4": {
+        "width": 12.0,
+        "length": 159.0,
+        "spacing": 1.5
+    },
+    "PBS": {
+        "length": 395.0,
+        "refer": 1.2,
+        "wider": 1.85,
+        "spacing": 4.4
+    },
+    "taper": {
+        "length": 10.0,
+        "width": 3.0
+    },
+    "tip": {
+        "length": 700.0,
+        "width": 0.44,
+        "end tip length": 500.0
+    },
+    "pad": {
+        "length": 400.0,
+        "width": 10.0
+    },
+    "grating": {
+        "duty": 0.5,
+        "period": 1.0
+    },
+    "directional coupler spacing": 2.0,
+    "delay radius step": 100.0,
+    "tap spacing": 3.6
+}
