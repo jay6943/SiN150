@@ -17,15 +17,15 @@ def amzi(xpos, ypos):
   x, y = dev.filled(x, y)
   _, y = tip.refer(x, y + cfg.ch * 2)
   _, y = dly.device(x, y + cfg.ch)
-  _, y = tip.chips(x, y + cfg.ch, dxf.arange(0.34, 0.54, 0.02))
-  _, y = voa.chip(x, y + cfg.ch * 4, 4000, cfg.lchip)
+  _, y = tip.chips(x, y + cfg.ch, dxf.ranges(0.34, 0.54, 0.02))
+  _, y = voa.chip(x, y + cfg.ch * 4, 4000, 9)
   dev.split('metal', 0, -1)
 
 
 def delay(xpos, ypos):
   x, y = key.frame(xpos, ypos, 1)
   x, y = dev.filled(x, y)
-  _, y = tap.chips(x, y + cfg.ch, dxf.arange(3.0, 4.4, 0.1))
+  _, y = tap.chips(x, y + cfg.ch, dxf.ranges(3.0, 4.4, 0.1))
   _, y = tip.refer(x, y)
   sem.chips(x, y - cfg.ch * 4)
 
@@ -40,11 +40,11 @@ def pbs_1x2_2x2(xpos, ypos):
   x, y = dev.filled(x, y)
   _, y = pbs.polarizer(x, y + 2 * cfg.ch, -1)
   _, y = tip.refer(x, y)
-  _, y = pbs.chips(x, y, dxf.arange(3.6, 5.2, 0.1))
+  _, y = pbs.chips(x, y, dxf.ranges(3.6, 5.2, 0.1))
   _, y = tip.refer(x, y + cfg.ch)
-  _, y = y1x2.chips(x, y, dxf.arange(33, 41, 1))
+  _, y = y1x2.chips(x, y, 9, 33, 41, 1)
   _, y = tip.refer(x, y - cfg.ch * 0.5)
-  _, y = y2x2.chips(x, y, dxf.arange(103, 111, 1))
+  _, y = y2x2.chips(x, y, 9, 103, 111, 1)
   _, y = tip.refer(x, y)
   _, y = pbs.polarizer(x, y + cfg.ch, 1)
 
