@@ -4,7 +4,7 @@ import dev
 import key
 import tip
 import dly
-import pbs
+import pbc
 import voa
 import tap
 import sem
@@ -17,15 +17,15 @@ def amzi(xpos, ypos):
   x, y = dev.filled(x, y)
   _, y = tip.refer(x, y + cfg.ch * 2)
   _, y = dly.device(x, y + cfg.ch)
-  _, y = tip.chips(x, y + cfg.ch, dxf.ranges(0.34, 0.54, 0.02))
-  _, y = voa.chip(x, y + cfg.ch * 4, 4000, 9)
+  _, y = tip.chips(x, y + cfg.ch, 0.34, 0.54, 0.02)
+  _, y = voa.chip(x, y + cfg.ch * 4, 4000)
   dev.split('metal', 0, -1)
 
 
 def delay(xpos, ypos):
   x, y = key.frame(xpos, ypos, 1)
   x, y = dev.filled(x, y)
-  _, y = tap.chips(x, y + cfg.ch, dxf.ranges(3.0, 4.4, 0.1))
+  _, y = tap.chips(x, y + cfg.ch, 3.0, 4.4, 0.1)
   _, y = tip.refer(x, y)
   sem.chips(x, y - cfg.ch * 4)
 
@@ -38,15 +38,15 @@ def marks(xpos, ypos):
 def pbs_1x2_2x2(xpos, ypos):
   x, y = key.frame(xpos, ypos, 1)
   x, y = dev.filled(x, y)
-  _, y = pbs.polarizer(x, y + 2 * cfg.ch, -1)
+  _, y = pbc.polarizer(x, y + 2 * cfg.ch, -1)
   _, y = tip.refer(x, y)
-  _, y = pbs.chips(x, y, dxf.ranges(3.6, 5.2, 0.1))
+  _, y = pbc.chips(x, y, 3.6, 5.2, 0.1)
   _, y = tip.refer(x, y + cfg.ch)
-  _, y = y1x2.chips(x, y, 9, 33, 41, 1)
+  _, y = y1x2.chips(x, y, 33, 41, 1)
   _, y = tip.refer(x, y - cfg.ch * 0.5)
-  _, y = y2x2.chips(x, y, 9, 103, 111, 1)
+  _, y = y2x2.chips(x, y, 103, 111, 1)
   _, y = tip.refer(x, y)
-  _, y = pbs.polarizer(x, y + cfg.ch, 1)
+  _, y = pbc.polarizer(x, y + cfg.ch, 1)
 
 
 def chips(region):
@@ -60,7 +60,6 @@ def chips(region):
 if __name__ == '__main__':
   filename = f'SiN150_V{cfg.ver}_{cfg.draft}'
   chips([0, 1, 2, 3, 4])
-  # dev.savedxf(filename)
   dev.saveas(filename)
   dev.dlayers(filename, 'rect', 'edge')
   dev.dlayers(filename, 'hole', 'bars')
